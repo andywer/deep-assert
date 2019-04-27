@@ -1,10 +1,12 @@
 # deep-assert
 
-Providing a better deep-equals assertion experience. Easily write object and array expectations, with `any()` and `satisfies()` or write and use your own custom assertions.
+Providing a better deep-equals assertion experience.
 
-Another focus has been providing a short, but precise error output. It shows you exactly where the values don't match, even for large nested objects, yet without cluttering your console.
-
-Works with objects, arrays, dates, buffers, etc. It's small, it's simple and it comes with zero dependencies.
+* Easily write object and array expectations, with `any()` and `satisfies()`
+* Create your own custom assertions
+* Short, but precise diffs, even for large nested objects
+* Works with objects, arrays, dates, buffers, etc
+* Zero dependencies
 
 <br />
 
