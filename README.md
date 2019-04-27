@@ -2,7 +2,15 @@
 
 Providing a better deep-equals assertion experience. Easily write object and array expectations, with `any()` and `satisfies()` or write and use your own custom assertions.
 
-<!-- TODO: Picture of error -->
+Another focus has been providing a short, but precise error output. It shows you exactly where the values don't match, even for large nested objects, yet without cluttering your console.
+
+Works with objects, arrays, dates, buffers, etc. It's small, it's simple and it comes with zero dependencies.
+
+<br />
+
+<p align=center>
+  <img alt="Terminal" src="./media/terminal.png" width="80%" />
+</p>
 
 ## Installation
 
