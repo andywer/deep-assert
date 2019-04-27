@@ -1,4 +1,4 @@
-# deep-assert
+# deep-assert&nbsp;&nbsp;[![Build Status](https://travis-ci.org/andywer/deep-assert.svg?branch=master)](https://travis-ci.org/andywer/deep-assert)
 
 Providing a better deep-equals assertion experience.
 
