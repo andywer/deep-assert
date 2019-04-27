@@ -1,0 +1,46 @@
+{
+  "name": "deep-assert",
+  "version": "0.0.0",
+  "description": "Better deep-equals object expectations, supporting dynamic bottom-up assertions using any() and satisfies().",
+  "license": "MIT",
+  "author": "Andy Wermke (https://github.com/andywer)",
+  "repository": "andywer/deep-assert",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "ava test/**/*.test.ts",
+    "posttest": "tslint --project .",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "assert",
+    "deep",
+    "equals",
+    "expect",
+    "object",
+    "any",
+    "satisfies",
+    "spread"
+  ],
+  "devDependencies": {
+    "@types/node": "^11.13.8",
+    "ava": "^1.4.1",
+    "ts-node": "^8.1.0",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.4.5"
+  },
+  "ava": {
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "files": [
+    "dist/**"
+  ]
+}
