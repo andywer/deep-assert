@@ -1,4 +1,6 @@
-# deep-assert&nbsp;&nbsp;[![Build Status](https://travis-ci.org/andywer/deep-assert.svg?branch=master)](https://travis-ci.org/andywer/deep-assert)
+# deep-assert
+[![Build Status](https://img.shields.io/travis/andywer/deep-assert/master.svg?style=flat-square)](https://travis-ci.org/andywer/deep-assert)
+[![npm](https://img.shields.io/npm/v/deep-assert.svg?style=flat-square)](https://www.npmjs.com/package/deep-assert)
 
 Providing a better deep-equals assertion experience.
 
@@ -16,7 +18,9 @@ Providing a better deep-equals assertion experience.
 
 ## Installation
 
-Not yet published to npm.
+```
+npm install deep-assert
+```
 
 ## Usage
 
