@@ -26,10 +26,12 @@ npm install deep-assert
 
 ### Basic
 
+Let's say we want to check if an array of user objects matches our expectation, but we don't know what the `id` is gonna be, since it's a random ID. It's easy, using `any()`.
+
 ```js
 import * as assert from "assert-deep"
 
-assert.deepEquals(getUsers() , [
+assert.deepEquals(getUsers(), [
   {
     id: assert.any(),
     name: "John Smith",
@@ -45,13 +47,15 @@ assert.deepEquals(getUsers() , [
 
 ### Custom assertions
 
+Let's try the previous use case again, but this time we check that the `id` is a valid UUIDv4. We use the `satisfies()` helper function to create a custom assertion to be used within the object expectation.
+
 ```js
 import * as assert from "assert-deep"
 
 const uuidRegex = /^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$/
 const assertUUID = assert.satisfies(value => typeof value === "string" && value.match(uuidRegex))
 
-assert.deepEquals(getUsers() , [
+assert.deepEquals(getUsers(), [
   {
     id: assertUUID(),
     name: "John Smith",
@@ -63,6 +67,22 @@ assert.deepEquals(getUsers() , [
     active: false
   }
 ])
+```
+
+### Spreading any()
+
+Normally `deepEquals()` will fail if there are unexpected properties on the tested object. We can use `any()` with the object spread operator to allow additional properties to be present.
+
+`deepEquals()` will then only check the expected properties and ignore all other ones.
+
+```js
+import * as assert from "assert-deep"
+
+assert.deepEquals(getUsers()[0], {
+  name: "John Smith",
+  active: true,
+  ...assert.any()
+})
 ```
 
 ## License
