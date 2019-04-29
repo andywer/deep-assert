@@ -2,12 +2,12 @@
 [![Build Status](https://img.shields.io/travis/andywer/deep-assert/master.svg?style=flat-square)](https://travis-ci.org/andywer/deep-assert)
 [![npm](https://img.shields.io/npm/v/deep-assert.svg?style=flat-square)](https://www.npmjs.com/package/deep-assert)
 
-Providing a better deep-equals assertion experience.
+The most developer-friendly way to write assertions for large or complicated objects and arrays.
 
-* Easily write object and array expectations, with `any()` and `satisfies()`
-* Create your own custom assertions
+* Use `any()` and `satisfies()` property matchers
 * Short, but precise diffs, even for large nested objects
-* Works with objects, arrays, dates, buffers, etc
+* Works with objects, arrays, dates, buffers, and more
+* Write custom property assertions
 * Zero dependencies
 
 <br />
@@ -31,16 +31,24 @@ Let's say we want to check if an array of user objects matches our expectation, 
 ```js
 import * as assert from "assert-deep"
 
-assert.deepEquals(getUsers(), [
+assert.deepEquals(
+  // Actual value:
+  {
+    id: Math.random(),
+    name: "John Smith",
+    meta: {
+      isActive: true,
+      lastLogin: new Date("2019-04-29T12:31:00")
+    }
+  },
+  // Expectation:
   {
     id: assert.any(),
     name: "John Smith",
-    active: true
-  },
-  {
-    id: assert.any(),
-    name: "Jane Smith",
-    active: false
+    meta: {
+      isActive: true,
+      lastLogin: new Date("2019-04-29T12:31:00")
+    }
   }
 ])
 ```
@@ -52,37 +60,56 @@ Let's try the previous use case again, but this time we check that the `id` is a
 ```js
 import * as assert from "assert-deep"
 
-const uuidRegex = /^[0-9a-fA-F]{8}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{4}\-[0-9a-fA-F]{12}$/
-const assertUUID = assert.satisfies(value => typeof value === "string" && value.match(uuidRegex))
+const assertPositiveNumber = () => assert.satisfies(value => typeof value === "number" && value > 0)
 
-assert.deepEquals(getUsers(), [
+assert.deepEquals(
+  // Actual value:
   {
-    id: assertUUID(),
+    id: Math.random(),
     name: "John Smith",
-    active: true
+    meta: {
+      isActive: true,
+      lastLogin: new Date("2019-04-29T12:31:00")
+    }
   },
+  // Expectation:
   {
-    id: assertUUID(),
-    name: "Jane Smith",
-    active: false
+    id: assertPositiveNumber(),
+    name: "John Smith",
+    meta: {
+      isActive: true,
+      lastLogin: new Date("2019-04-29T12:31:00")
+    }
   }
 ])
 ```
 
 ### Spreading any()
 
-Normally `deepEquals()` will fail if there are unexpected properties on the tested object. We can use `any()` with the object spread operator to allow additional properties to be present.
+Normally `deepEquals()` will fail if there are properties on the tested object that don't exist on the expectation. We can use `any()` with the object spread operator to allow additional properties to be present.
 
 `deepEquals()` will then only check the expected properties and ignore all other ones.
 
 ```js
 import * as assert from "assert-deep"
 
-assert.deepEquals(getUsers()[0], {
-  name: "John Smith",
-  active: true,
-  ...assert.any()
-})
+assert.deepEquals(
+  // Actual value:
+  {
+    id: Math.random(),
+    name: "John Smith",
+    meta: {
+      isActive: true,
+      lastLogin: new Date("2019-04-29T12:31:00")
+    }
+  },
+  // Expectation:
+  {
+    id: assert.any(),
+    name: "John Smith",
+    ...assert.any()
+  }
+])
 ```
 
 ### Recursive objects
@@ -92,10 +119,10 @@ You can call `deepEquals()` in a custom `satisfies()` as well. This way you can 
 ```js
 import * as assert from "assert-deep"
 
-const a = { foo: {} }
-a.foo.parent = a.foo
+const actual = { foo: {} }
+actual.foo.parent = actual.foo
 
-assert.deepEquals(a, {
+assert.deepEquals(actual, {
   foo: assert.satisfies(foo => assert.deepEquals(foo, { parent: foo }))
 })
 ```
