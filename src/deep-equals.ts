@@ -1,9 +1,7 @@
 // Based on code from <https://github.com/substack/node-deep-equal>
 
 import { createObjectDiffMessage, describePath } from "./formatter"
-
-const $any = Symbol("assert.any")
-const $compare = Symbol("assert.compare")
+import { $any, $compare } from "./symbols"
 
 interface ErrorWithPath extends Error {
   path: Array<string | number>

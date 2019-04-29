@@ -1,3 +1,4 @@
+import { $any, $compare } from "./symbols"
 
 function createObjectDiff(actual: any, expected: any, propMatches: Array<[string | number, boolean]>): string {
   const maxPropsToPrint = 6
@@ -75,6 +76,10 @@ function previewValue(value: any) {
     return "undefined"
   } else if (value === null) {
     return "null"
+  } else if (typeof value === "object" && value[$any]) {
+    return "any()"
+  } else if (typeof value === "object" && value[$compare]) {
+    return "satisfies(…)"
   } else if (Array.isArray(value)) {
     return value.length === 0 ? "[]" : "[ … ]"
   } else if (Buffer.isBuffer(value)) {
