@@ -1,6 +1,6 @@
 {
   "name": "deep-assert",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Better deep-equals object expectations, supporting dynamic bottom-up assertions using any() and satisfies().",
   "license": "MIT",
   "author": "Andy Wermke (https://github.com/andywer)",
