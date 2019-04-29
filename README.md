@@ -87,6 +87,8 @@ assert.deepEquals(getUsers()[0], {
 
 ### Recursive objects
 
+You can call `deepEquals()` in a custom `satisfies()` as well. This way you can easily test recursive data structures, for instance.
+
 ```js
 import * as assert from "assert-deep"
 
