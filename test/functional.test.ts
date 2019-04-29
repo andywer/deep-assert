@@ -90,3 +90,12 @@ test("can define custom satisfies()", t => {
     { foo: 1, bar: assert.satisfies((value: number) => value === 2) }
   ))
 })
+
+test("can compare recursive data structures", t => {
+  const a: any = { foo: {} }
+  a.foo.parent = a.foo
+
+  t.notThrows(() => assert.deepEquals(a, {
+    foo: assert.satisfies(foo => assert.deepEquals(foo, { parent: foo }))
+  }))
+})

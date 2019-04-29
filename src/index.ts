@@ -9,6 +9,8 @@ export default function deepEquals(actual: any, expected: any, opts?: Options) {
     // Keep the stack trace short and sweet
     throw Error(result.message)
   }
+
+  return true
 }
 
 export {

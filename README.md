@@ -85,6 +85,19 @@ assert.deepEquals(getUsers()[0], {
 })
 ```
 
+### Recursive objects
+
+```js
+import * as assert from "assert-deep"
+
+const a = { foo: {} }
+a.foo.parent = a.foo
+
+assert.deepEquals(a, {
+  foo: assert.satisfies(foo => assert.deepEquals(foo, { parent: foo }))
+})
+```
+
 ## License
 
 MIT
