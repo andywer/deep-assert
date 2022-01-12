@@ -8,7 +8,8 @@ interface ErrorWithPath extends Error {
 }
 
 export interface Options {
-  strict?: boolean
+  strict?: boolean,
+  allowAdditionalProps?: boolean,
 }
 
 type InternalComparisonFunction = (actual: any) => true | Error
@@ -93,7 +94,7 @@ export function satisfies(compare: UserComparisonFunction): Comparison {
 
 export function deepEquals(actual: any, expected: any, path: Array<string | number>, opts: Options = {}): true | Error {
   let result: true | Error
-  let allowAdditionalProps: boolean = false
+  let allowAdditionalProps: boolean = opts.allowAdditionalProps === true
 
   if (expected && expected[$any]) {
     if (typeof expected === "object" && Object.keys(expected).length > 0) {

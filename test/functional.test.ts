@@ -99,3 +99,15 @@ test("can compare recursive data structures", t => {
     foo: assert.satisfies(foo => assert.deepEquals(foo, { parent: foo }))
   }))
 })
+
+test("can match on subsets", t => {
+  assert.deepEquals({foo: {bar: "baz", extra: true}, extra: true}, {foo: {bar: "baz"}}, {allowAdditionalProps: true})
+  t.pass()
+})
+
+test("subsets only match when option is passed", t => {
+  t.throws(() => assert.deepEquals(
+    {foo: {bar: "baz", extra: true}, extra: true},
+    {foo: {bar: "baz"}}
+  ))
+})
