@@ -2,18 +2,22 @@ import test from "ava"
 import * as assert from "../src/index"
 
 test("shows a useful error message for primitive assertions", t => {
-  t.throws(() => assert.deepEquals(null, 1), `
+  t.throws(
+    () => assert.deepEquals(null, 1),
+    { message: `
 Values do not match:
     Actual: null
   Expected: 1
-  `.trim())
+  `.trim() })
 })
 
 test("shows a useful error message for object assertions", t => {
-  t.throws(() => assert.deepEquals(
-    { foo: 1 },
-    { foo: 2 }
-  ), `
+  t.throws(
+    () => assert.deepEquals(
+      { foo: 1 },
+      { foo: 2 }
+    ),
+    { message:`
 Objects do not match:
   - Actual, + Expected
 
@@ -21,12 +25,14 @@ Objects do not match:
 -   foo: 1,
 +   foo: 2,
   }
-  `.trim())
+  `.trim() })
 
-  t.throws(() => assert.deepEquals(
-    { foo: 1 },
-    { foo: [2] }
-  ), `
+  t.throws(
+    () => assert.deepEquals(
+      { foo: 1 },
+      { foo: [2] }
+    ),
+    { message: `
 Objects do not match:
   - Actual, + Expected
 
@@ -34,12 +40,14 @@ Objects do not match:
 -   foo: 1,
 +   foo: [ … ],
   }
-  `.trim())
+  `.trim() })
 
-  t.throws(() => assert.deepEquals(
-    { foo: 1, bar: "x" },
-    { foo: 2, bar: "x" }
-  ), `
+  t.throws(
+    () => assert.deepEquals(
+      { foo: 1, bar: "x" },
+      { foo: 2, bar: "x" }
+    ),
+    { message: `
 Objects do not match:
   - Actual, + Expected
 
@@ -48,12 +56,14 @@ Objects do not match:
 -   foo: 1,
 +   foo: 2,
   }
-  `.trim())
+  `.trim() })
 
-  t.throws(() => assert.deepEquals(
-    { foo: { bar: "x", baz: { hello: true } } },
-    { foo: { bar: "y", baz: { hello: true } } }
-  ), `
+  t.throws(
+    () => assert.deepEquals(
+      { foo: { bar: "x", baz: { hello: true } } },
+      { foo: { bar: "y", baz: { hello: true } } }
+    ),
+    { message: `
 Objects do not match:
   - Actual, + Expected
 
@@ -63,12 +73,14 @@ Objects do not match:
 +   bar: "y",
     baz: { … },
   }
-  `.trim())
+  `.trim() })
 
-  t.throws(() => assert.deepEquals(
-    { foo: 1 },
-    { bar: 1 }
-  ), `
+  t.throws(
+    () => assert.deepEquals(
+      { foo: 1 },
+      { bar: 1 }
+    ),
+    { message: `
 Objects do not match:
   - Actual, + Expected
 
@@ -76,14 +88,16 @@ Objects do not match:
 +   bar: 1,
 -   foo: 1,
   }
-  `.trim())
+  `.trim() })
 })
 
 test("shows a useful error message for array assertions", t => {
-  t.throws(() => assert.deepEquals(
-    [1, 2],
-    [1, 3]
-  ), `
+  t.throws(
+    () => assert.deepEquals(
+      [1, 2],
+      [1, 3]
+    ),
+    { message: `
 Arrays do not match:
   - Actual, + Expected
 
@@ -92,5 +106,5 @@ Arrays do not match:
 -   2,
 +   3,
   ]
-  `.trim())
+  `.trim() })
 })
