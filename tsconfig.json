@@ -12,5 +12,10 @@
   },
   "include": [
     "./src/index.ts"
-  ]
+  ],
+  "ts-node": {
+    "compilerOptions": {
+      "noImplicitAny": false
+    }
+  }
 }

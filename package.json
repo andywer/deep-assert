@@ -26,17 +26,19 @@
   ],
   "devDependencies": {
     "@types/node": "^11.13.8",
-    "ava": "^1.4.1",
+    "ava": "^4.0.1",
     "rimraf": "^2.6.3",
-    "ts-node": "^8.1.0",
+    "ts-node": "^10.4.0",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.4.5"
   },
   "ava": {
-    "compileEnhancements": false,
     "extensions": [
       "ts"
+    ],
+    "files": [
+      "test/**/*.test.ts"
     ],
     "require": [
       "ts-node/register"
